@@ -1,15 +1,15 @@
 'use strict';
 $(function(){
   var car = {
-    text:'car'
+    attr_id:'car'
   };
   Canvas.init(car);
   var obstacle = {
-    text:'hi1'
+    attr_id:'hi3'
   };
   Canvas.add_obstacles(obstacle);
   obstacle = {
-    text:'hi2'
+    attr_id:'hi2'
   }
   Canvas.add_obstacles(obstacle);
   

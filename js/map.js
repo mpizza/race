@@ -29,8 +29,8 @@ var Canvas = {
   },
   
   drawcar : function drawcar(){
-    console.log(this.car.text);
-    //this.car.draw();
+    console.log(this.car.attr_id);
+    //this.car.draw(this.ctx);
   },
   
   add_obstacles : function add_obstacles(obstacle) {
@@ -47,8 +47,8 @@ var Canvas = {
     var l = this.obstacles.length;
     for (var i = 0; i < l; i++) {
       var obstacle = this.obstacles[i];
-      console.log(obstacle.text);
-      //obstacle.draw();
+      console.log(obstacle.attr_id);
+      //obstacle.draw(this.ctx);
     }
   },
   
