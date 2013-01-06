@@ -14,8 +14,26 @@
   	    margin:auto 200px;
   	    border:1px solid #f00;
   	  }
-  	  #bg-image{
+  	  #bg-image, #car-image{
   	    display:none;
+  	  }
+  	  div#console{
+  	    margin:auto 200px;
+  	    width:600px;
+  	    text-align:center;
+  	    border:1px solid #f00;
+  	  }
+  	  div#console span{
+  	    width:100px;
+  	    display:inline-block;
+  	    padding:10px 5px;
+  	    font-size:14px;
+  	    height:10px;
+  	    border:1px solid #f00;
+  	  }
+  	  div#console span:hover{
+  	    background:#000;
+  	    color:#fff;
   	  }
 		</style>
   </head>
@@ -23,9 +41,15 @@
   	<div id="content">
   	  <canvas id="pad" width="600" height="700"></canvas>
   	  <img id="bg-image" src="images/road.jpg" alt="map-bg"/>
+		  <img id="car-image" src="images/Car_icon.png" alt="car-bg"/>
+		  <div id="console">
+		    <span id="left" data-direct="-10">left</span>
+		    <span id="right" data-direct="10">right</span>
+		  </div>
+		  <input type="button" id="start" value="start">
 		</div>
   	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-    <script type="text/javascript" src="js/shape.js"></script>
+    <script type="text/javascript" src="js/obstacle.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
     <script type="text/javascript" src="js/run.js"></script>
   </body>

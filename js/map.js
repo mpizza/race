@@ -20,7 +20,6 @@ var Canvas = {
     this.ctx = this.pad.getContext('2d');
     this.width = this.pad.width;
     this.height = this.pad.width;
-    this.car = car;
     console.log(this.width+":"+this.height);
   },
   
@@ -29,8 +28,8 @@ var Canvas = {
   },
   
   drawcar : function drawcar(){
-    console.log(this.car.attr_id);
-    //this.car.draw(this.ctx);
+    //console.log(this.car.attr_id);
+    this.car.draw(this.ctx);
   },
   
   add_obstacles : function add_obstacles(obstacle) {
@@ -62,7 +61,9 @@ var Canvas = {
       console.log('redraw');
       this.clear();
       this.drawbg();
-      this.drawcar();
+      if(this.car!==null){
+        this.drawcar();
+      }
       this.draw_obstacles();
       this.valid = false; // reset valid
     }// draw it
