@@ -16,7 +16,7 @@ var Canvas = {
   valid : false, // when set to true, the canvas will redraw everything
   car:null,
   
-  init :function init(car = null){
+  init :function init(car){
     this.ctx = this.pad.getContext('2d');
     this.width = this.pad.width;
     this.height = this.pad.width;
@@ -66,5 +66,5 @@ var Canvas = {
       this.draw_obstacles();
       this.valid = false; // reset valid
     }// draw it
-  },
+  }
 }// end of CanvasState
