@@ -31,6 +31,11 @@ function deviceMotionHandler(eventData) {
     document.getElementById("moCalcTiltFB").innerHTML = tiltFB;
     if( Canvas.car != null) {
         Canvas.car.x = carmove(Canvas.car.x,  (Math.round(acceleration.x)*-1));
+        if ((Math.round(acceleration.x)*-1) > 0){
+          Canvas.car.angle = -10;
+        }else{
+          Canvas.car.angle = 10;
+        }
         Canvas.valid = true;
         document.getElementById("carpos").innerHTML = Canvas.car.x;
     //console.log(Canvas.car.x + "update");
