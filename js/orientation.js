@@ -29,7 +29,7 @@ function deviceMotionHandler(eventData) {
   document.getElementById("moAccel").innerHTML = rawAcceleration;
   document.getElementById("moCalcTiltLR").innerHTML = tiltLR;
   document.getElementById("moCalcTiltFB").innerHTML = tiltFB;
-  if( Canvas.car == null) {
+  if( Canvas.car != null) {
     Canvas.car.x = carmove(Canvas.car.x,  Math.round(acceleration.x));
     Canvas.valid = true;
     document.getElementById("carpos").innerHTML = Canvas.car.x;
