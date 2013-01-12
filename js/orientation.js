@@ -1,11 +1,13 @@
 'use strict';
 if (window.DeviceMotionEvent) {
-  window.addEventListener('devicemotion', deviceMotionHandler, false);
+  window.addEventListener('devicemotion', function(e, Canvas){
+    deviceMotionHandler(eventData, Canvas);
+  }, false);
 } else {
   document.getElementById("dmEvent").innerHTML = "Not supported on your device."
 }
 
-function deviceMotionHandler(eventData) {
+function deviceMotionHandler(eventData, Canvas) {
   // Grab the acceleration including gravity from the results
   var acceleration = eventData.accelerationIncludingGravity;
 
