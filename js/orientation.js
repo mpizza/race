@@ -30,7 +30,7 @@ function deviceMotionHandler(eventData) {
   document.getElementById("moCalcTiltLR").innerHTML = tiltLR;
   document.getElementById("moCalcTiltFB").innerHTML = tiltFB;
   if( Canvas.car = null) {
-    Canvas.car.x = Canvas.car.x + Math.round(acceleration.x);
+    Canvas.car.x = carmove(Canvas.car.x,  Math.round(acceleration.x));
     Canvas.valid = true;
     console.log(Canvas.car.x + "update");
   }
