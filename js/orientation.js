@@ -1,6 +1,8 @@
 'use strict';
+document.getElementById("carpos").innerHTML = "bhihihihi";
 if (window.DeviceMotionEvent) {
-  window.addEventListener('devicemotion', function(e, Canvas){
+  window.addEventListener('devicemotion', function(e){
+    document.getElementById("carpos").innerHTML = "";
     deviceMotionHandler(eventData, Canvas);
   }, false);
 } else {
