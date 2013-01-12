@@ -60,8 +60,27 @@ function carmove(posx, val){
 var objs = new Array();
 
 function play(){
-    var sch_screen = createScreen();
-    var createCar = createNewCar();
+    var line_img = new Image(); 
+    line_img.src = document.getElementById('line-image').src; 
+    
+    var tree_img = new Image(); 
+    tree_img.src = document.getElementById('tree-image').src; 
+    
+    var other_car_img = new Image(); 
+    other_car_img.src = document.getElementById('car-image').src; 
+    
+    var sch_screen = null;
+    line_img.onload = function(){
+        tree_img.onload = function(){
+            sch_screen = createScreen(line_img, tree_img);
+        }
+    }
+    
+    var createCar = null;
+    other_car_img.onload = function(){
+        createCar = createNewCar(other_car_img);
+    }
+    
     Canvas.valid = true;
     var run = setInterval(function(){
         for(var i=0; i<objs.length; i++){
@@ -89,50 +108,46 @@ function play(){
             if(obj.y>=800){
                 console.info("kill 600 "+i);
                 Canvas.kill_obstacles(obj.attr_id);
+                objs.splice(i, 1);
+                i--;
             }
         }
         
     }, 1);
 }
 
-function createScreen(){
-    var seq = 0;
+function createScreen(line_img, tree_img){
+    
+    
     var createScreen = setInterval(function(){
         var x = 285;
-        var line_img = new Image(); 
-        line_img.src = document.getElementById('line-image').src; 
-        line_img.onload = function(){
-            seq++;
-            var id = "line"+seq;
-            var line = new obstacle(x,-200,100,72,0,"line",0,line_img,'#AAAAAA',id);            
-            objs.push(line);
-            Canvas.add_obstacles(line);
-            Canvas.valid = true;
-            Canvas.draw();
-            console.info("other car end");
-            
-        };  
         
-        var tree_img = new Image(); 
-        tree_img.src = document.getElementById('tree-image').src; 
-        tree_img.onload = function(){
-            seq++;
-            var id = "tree"+seq;
-            var tree = new obstacle(0,-200,100,72,0,"tree",0,tree_img,'#AAAAAA',id);
-            objs.push(tree);
-            Canvas.add_obstacles(tree);
-            tree = new obstacle(500,-200,100,72,0,"tree",0,tree_img,'#AAAAAA',id);
-            objs.push(tree);
-            Canvas.add_obstacles(tree);
-            Canvas.valid = true;
-            Canvas.draw();
-        };  
+        var line_seq = 0;
+        line_seq++;
+        var id = "line"+line_seq;
+        var line = new obstacle(x,-200,100,72,0,"line",0,line_img,'#AAAAAA',id);            
+        objs.push(line);
+        Canvas.add_obstacles(line);
+        console.info("other car end");
+            
+        var tree_seq = 0;
+        tree_seq++;
+        id = "tree"+tree_seq;
+        var tree = new obstacle(0,-200,100,72,0,"tree",0,tree_img,'#AAAAAA',id);
+        objs.push(tree);
+        Canvas.add_obstacles(tree);
+        tree = new obstacle(500,-200,100,72,0,"tree",0,tree_img,'#AAAAAA',id);
+        objs.push(tree);
+        Canvas.add_obstacles(tree);
+       
+        Canvas.valid = true;
+        Canvas.draw();
     }, 1200);
     
     return createScreen;
 }
 
-function createNewCar(){
+function createNewCar(other_car_img){
     
     var seq = 0;
     var createCar = setInterval(function(){
@@ -145,20 +160,17 @@ function createNewCar(){
                 x-=65;
             }
         }
-        var other_car_img = new Image(); 
-        other_car_img.src = document.getElementById('car-image').src; 
-        other_car_img.onload = function(){
-            console.info("other car start");
-            seq++;
-            var carid = "car"+seq;
-            var car = new obstacle(x,-100,100,72,0,"car",0,other_car_img,'#AAAAAA',carid);            
-            objs.push(car);
-            Canvas.add_obstacles(car);
-            Canvas.valid = true;
-            Canvas.draw();
-            console.info("other car end");
+        
+        console.info("other car start");
+        seq++;
+        var carid = "car"+seq;
+        var car = new obstacle(x,-100,100,72,0,"car",0,other_car_img,'#AAAAAA',carid);            
+        objs.push(car);
+        Canvas.add_obstacles(car);
+        Canvas.valid = true;
+        Canvas.draw();
+        console.info("other car end");
             
-        };  
     }, 2000);
     
     return createCar;
