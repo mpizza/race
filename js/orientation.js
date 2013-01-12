@@ -1,15 +1,11 @@
 'use strict';
-document.getElementById("carpos").innerHTML = "bhihihihi";
 if (window.DeviceMotionEvent) {
-  window.addEventListener('devicemotion', function(e){
-    document.getElementById("carpos").innerHTML = "";
-    deviceMotionHandler(eventData, Canvas);
-  }, false);
+  window.addEventListener('devicemotion', deviceMotionHandler, false);
 } else {
   document.getElementById("dmEvent").innerHTML = "Not supported on your device."
 }
 
-function deviceMotionHandler(eventData, Canvas) {
+function deviceMotionHandler(eventData) {
   // Grab the acceleration including gravity from the results
   var acceleration = eventData.accelerationIncludingGravity;
 
@@ -33,7 +29,7 @@ function deviceMotionHandler(eventData, Canvas) {
   document.getElementById("moAccel").innerHTML = rawAcceleration;
   document.getElementById("moCalcTiltLR").innerHTML = tiltLR;
   document.getElementById("moCalcTiltFB").innerHTML = tiltFB;
-  if( Canvas.car = null) {
+  if( Canvas.car == null) {
     Canvas.car.x = carmove(Canvas.car.x,  Math.round(acceleration.x));
     Canvas.valid = true;
     document.getElementById("carpos").innerHTML = Canvas.car.x;
