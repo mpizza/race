@@ -48,24 +48,24 @@ $(function(){
 
 function carmove(posx, val){
     var direct =  parseInt(posx) +parseInt( val );
-    if (direct<0){
-        direct =0;
+    if (direct<100){
+        direct =100;
     }
-    if (direct>500){
-        direct =500;
+    if (direct>400){
+        direct =400;
     }
     return direct;
 }
 
-var cars = new Array();
+var objs = new Array();
 
 function play(){
     var sch_screen = createScreen();
     var createCar = createNewCar();
     Canvas.valid = true;
     var run = setInterval(function(){
-        for(var i=0; i<cars.length; i++){
-            var obj = cars[i];
+        for(var i=0; i<objs.length; i++){
+            var obj = objs[i];
             obj.y++;
             Canvas.valid=true;
             
@@ -79,10 +79,13 @@ function play(){
                     clearInterval(sch_screen);
                 }
             }
+            else {
+                obj.y++;
+            }
         }
         
-        for(var i=0; i<cars.length; i++){
-            var obj = cars[i];
+        for(var i=0; i<objs.length; i++){
+            var obj = objs[i];
             if(obj.y>=800){
                 console.info("kill 600 "+i);
                 Canvas.kill_obstacles(obj.attr_id);
@@ -100,14 +103,29 @@ function createScreen(){
         line_img.src = document.getElementById('line-image').src; 
         line_img.onload = function(){
             seq++;
-            var carid = "line"+seq;
-            var line = new obstacle(x,-200,100,72,0,carid,0,line_img,'#AAAAAA',carid);            
-            cars.push(line);
+            var id = "line"+seq;
+            var line = new obstacle(x,-200,100,72,0,"line",0,line_img,'#AAAAAA',id);            
+            objs.push(line);
             Canvas.add_obstacles(line);
             Canvas.valid = true;
             Canvas.draw();
             console.info("other car end");
             
+        };  
+        
+        var tree_img = new Image(); 
+        tree_img.src = document.getElementById('tree-image').src; 
+        tree_img.onload = function(){
+            seq++;
+            var id = "tree"+seq;
+            var tree = new obstacle(0,-200,100,72,0,"tree",0,tree_img,'#AAAAAA',id);
+            objs.push(tree);
+            Canvas.add_obstacles(tree);
+            tree = new obstacle(500,-200,100,72,0,"tree",0,tree_img,'#AAAAAA',id);
+            objs.push(tree);
+            Canvas.add_obstacles(tree);
+            Canvas.valid = true;
+            Canvas.draw();
         };  
     }, 1200);
     
@@ -118,22 +136,30 @@ function createNewCar(){
     
     var seq = 0;
     var createCar = setInterval(function(){
-        var x = random(0, 500);
+        var x = random(100, 400);
+        if(x>185&&x<215){
+            if(x>300){
+                x+=65;
+            }
+            else {
+                x-=65;
+            }
+        }
         var other_car_img = new Image(); 
         other_car_img.src = document.getElementById('car-image').src; 
         other_car_img.onload = function(){
             console.info("other car start");
             seq++;
             var carid = "car"+seq;
-            var car = new obstacle(x,0,100,72,0,"car",0,other_car_img,'#AAAAAA',carid);            
-            cars.push(car);
+            var car = new obstacle(x,-100,100,72,0,"car",0,other_car_img,'#AAAAAA',carid);            
+            objs.push(car);
             Canvas.add_obstacles(car);
             Canvas.valid = true;
             Canvas.draw();
             console.info("other car end");
             
         };  
-    }, 1500);
+    }, 2000);
     
     return createCar;
 }
