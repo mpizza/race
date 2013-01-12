@@ -32,7 +32,8 @@ function deviceMotionHandler(eventData) {
   if( Canvas.car = null) {
     Canvas.car.x = carmove(Canvas.car.x,  Math.round(acceleration.x));
     Canvas.valid = true;
-    console.log(Canvas.car.x + "update");
+    document.getElementById("carpos").innerHTML = Canvas.car.x;
+    //console.log(Canvas.car.x + "update");
   }
   // Apply the 2D rotation and 3D rotation to the image
   //var rotation = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB) + "deg)";
