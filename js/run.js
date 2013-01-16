@@ -96,6 +96,11 @@ function play(){
                     clearInterval(run);
                     clearInterval(createCar);
                     clearInterval(sch_screen);
+                    if(window.navigator.vibrate(0)){
+                      window.navigator.vibrate([500,100,500]);
+                      window.navigator.vibrate(0);
+                      document.getElementById("carpos").innerHTML = 'game over!!!';
+                    }
                 }
             }
             else {
